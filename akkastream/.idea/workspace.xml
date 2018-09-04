@@ -23,7 +23,7 @@
       <file leaf-file-name="StreamingClientApp.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/com/example/StreamingClientApp.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1285">
+            <state relative-caret-position="1882">
               <caret line="260" column="0" lean-forward="true" selection-start-line="260" selection-start-column="0" selection-end-line="260" selection-end-column="0" />
               <folding>
                 <element signature="e#21#47#0" expanded="true" />
@@ -829,7 +829,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/com/example/StreamingClientApp.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1285">
+        <state relative-caret-position="1882">
           <caret line="260" column="0" lean-forward="true" selection-start-line="260" selection-start-column="0" selection-end-line="260" selection-end-column="0" />
           <folding>
             <element signature="e#21#47#0" expanded="true" />
