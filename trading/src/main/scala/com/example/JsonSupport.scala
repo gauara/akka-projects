@@ -12,4 +12,5 @@ trait JsonSupport extends SprayJsonSupport with DefaultJsonProtocol {
   implicit val tradesJsonFormat = jsonFormat1(Trades)
 
   implicit val actionPerformedJsonFormat = jsonFormat1(ActionPerformed)
+
 }
