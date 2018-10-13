@@ -6,8 +6,10 @@ import akka.http.scaladsl.server.Route
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.PathMatchers.Segments._
 import com.example.GameLogic.Game
+import com.sun.xml.internal.ws.developer.MemberSubmissionAddressing.Validation
+import spray.json._
 
-trait TicTacToeApi extends JsonSupport {
+trait TicTacToeApi extends JsonSupport with Validattions {
 
   val gl = GameLogic()
 
@@ -19,7 +21,7 @@ trait TicTacToeApi extends JsonSupport {
             println("got a request ...")
             post {
               val response = gl.getNewGameResponse()
-              complete(response)
+              complete(response) // this does not work witout importing spray.json._
             }
           }
         }
@@ -34,6 +36,12 @@ trait TicTacToeApi extends JsonSupport {
                 case Some(g: Game) => "Valid Game"
                 case _ => "Invalid Game"
               }
+              entity(as[MatchRequest]) { req =>
+                validateRequest(req)(gl)
+                complete((StatusCodes.OK, msg))
+              }
+
+
               complete((StatusCodes.OK, msg))
             }
           }

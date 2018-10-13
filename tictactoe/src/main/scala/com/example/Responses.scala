@@ -1,27 +1,35 @@
 package com.example
 
+
+trait ServerResponse
+
 case class NewGameResponse(
                             gameId: Int,
                             words: Seq[String],
                             dict: Seq[String],
                             chances: Int
-                          )
+                          ) extends ServerResponse
 
 case class FailedScenarioResponse(
                                    gameId: Int,
                                    status: String,
                                    words: Seq[String] ,
                                    chance: Int
-
-                                 )
+                                 ) extends ServerResponse
 
 case class SuccessScenarioResponse(
                                    gameId: Int,
                                    status: String,
                                    pairs: Map[String, String] ,
                                    chance: Int
+                                 ) extends ServerResponse
 
-                                 )
+case class MatchResultResponse(
+                                    gameId: Int,
+                                    status: String,
+                                    pairs: Map[String, String] ,
+                                    chance: Int
+                                  ) extends ServerResponse
 
 object Responses {
 
@@ -45,10 +53,28 @@ object Responses {
     )
   }
 
+  def abortedScenarioResponse(g: Game) = {
+    FailedScenarioResponse(
+      gameId = g.gameId,
+      status = "aborted",
+      words = getNewWords(),
+      chance = g.chance // game counter should be handled somewhere else
+    )
+  }
+
   def successScenarioResponse(g: Game, prevWords: Seq[String]) = {
     SuccessScenarioResponse(
       gameId = g.gameId,
       status = "success",
+      pairs = prevWords.map(w => w -> keysAndMatches.get(w).get).toMap,
+      chance = g.chance
+    )
+  }
+
+  def matchResultResponse(g: Game, status: String, prevWords: Seq[String]) = {
+    SuccessScenarioResponse(
+      gameId = g.gameId,
+      status = status,
       pairs = prevWords.map(w => w -> keysAndMatches.get(w).get).toMap,
       chance = g.chance
     )
