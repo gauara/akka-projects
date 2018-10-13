@@ -255,7 +255,7 @@ object StreamingClientApp extends App with EventMarshalling {
     val fileSink = FileIO.toPath(Paths.get(inFile))
 
     val framing = Framing.delimiter(ByteString("\n"), 10240)
-      .map(_.decodeString("UTF8"))
+      .map(d => d.decodeString("UTF8"))
       .map(_.parseJson.convertTo[LogEvent])
       //.collect {case Some(e) => e}  // its not an option
 
